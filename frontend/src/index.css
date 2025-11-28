@@ -1,0 +1,26 @@
+/* Couleurs principales */
+:root {
+    --sdj-blue: #23387A;
+    --sdj-cyan: #039DCD;
+    --sdj-orange: #E75F2F;
+    --sdj-yellow: #F5B032;
+
+    /* Variantes claires */
+    --sdj-blue-light: #BDC4D7;
+    --sdj-cyan-light: #B3DDED;
+
+    /* Variantes sombres */
+    --sdj-blue-dark: #182755;
+    --sdj-cyan-dark: #006388;
+
+    /* Gris */
+    --sdj-gray-1: #F7F7F7;
+    --sdj-gray-2: #EFEFEF;
+    --sdj-gray-3: #C5C5C5;
+    --sdj-gray-4: #707070;
+    --sdj-gray-5: #5A5A5A;
+
+    /* Noir & Blanc */
+    --sdj-black: #000000;
+    --sdj-white: #FFFFFF;
+}

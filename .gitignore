@@ -1,0 +1,38 @@
+# --- WordPress ---
+backend/wp-admin/
+backend/wp-includes/
+backend/wp-content/upgrade/
+backend/wp-content/cache/
+backend/wp-content/uploads/
+
+# Garder seulement ton thème et tes plugins personnalisés
+!backend/wp-content/themes/
+!backend/wp-content/plugins/
+
+# Ignorer les thèmes par défaut
+backend/wp-content/themes/twentytwenty*/
+backend/wp-content/themes/twentythirteen*/
+backend/wp-content/themes/twenty*/
+
+# Ignorer plugins natifs
+backend/wp-content/plugins/akismet/
+backend/wp-content/plugins/hello.php
+
+# Fichiers sensibles
+backend/.htaccess
+backend/wp-config.php
+
+# --- Node / React ---
+frontend/node_modules/
+frontend/.env
+frontend/.vite/
+frontend/.next/
+frontend/build/
+frontend/dist/
+
+# --- Logs & System ---
+*.log
+*.sql
+*.tar.gz
+*.zip
+.DS_Store

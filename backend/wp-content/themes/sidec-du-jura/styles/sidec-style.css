@@ -1,0 +1,72 @@
+/* ===========================
+   HEADER SIDEC DU JURA
+=========================== */
+
+/* .sdj-header {
+    background-color: #1f3b82; 
+    padding: 15px 0;
+    width: 100%;
+    position: relative;
+} */
+
+/* .sdj-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sdj-logo img {
+    height: 60px;
+}
+
+.sdj-main-nav .sdj-menu {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.sdj-main-nav .sdj-menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    position: relative;
+}
+
+/* Séparateur | entre les items */
+/* .sdj-main-nav .sdj-menu li:not(:last-child)::after {
+    content: "|";
+    margin-left: 15px;
+    color: white;
+    opacity: 0.7;
+}
+
+.sdj-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sdj-actions button,
+.sdj-actions a {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.sdj-actions img {
+    width: 24px;
+    height: 24px;
+}
+
+.sdj-espace-adherent {
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}  */
