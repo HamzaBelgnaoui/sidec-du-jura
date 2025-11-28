@@ -36,7 +36,9 @@ export default function Header() {
 
                 {/* MENU */}
                 <nav className="sdj-menu">
-                    <Menu />
+                    <div className="sdj-menu-inner">
+                        <Menu />
+                    </div>
                 </nav>
 
                 {/* ACTIONS */}

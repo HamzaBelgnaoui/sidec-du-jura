@@ -65,58 +65,96 @@
 }
 
 /* ---------- nav desk ---------- */
+/* ESPACE  */
+/* Conteneur du menu (largeur fixe de la maquette) */
+.sdj-menu-inner {
+  width: 746px;        /* TA VALEUR EXACTE */
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* ESPACE ÉGAL */
+}
+
+/* liste UL */
+.sdj-nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;   /* IMPORTANT */
+  padding: 0;
+  margin: 0;
+}
+
+/* chaque LI devient auto pour le spacing */
+.sdj-nav li {
+  flex: 1;  
+  text-align: center;
+  position: relative;
+}
+
+/* ESPACE FIN */
+/* Menu wrapper */
 .sdj-nav{
   display:flex;
-  gap:22px;
+  gap:0;             /* IMPORTANT : on gère les espaces nous-mêmes */
   margin:0;
   padding:0;
-  align-items:center;
   list-style:none;
 }
 
-.sdj-nav li{
-  position:relative; 
+/* Colonne de chaque item : FIXE */
+.sdj-nav li {
+  width: 140px;     
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  text-align:center;
 }
 
+/* Lien */
 .sdj-nav a{
-  color:var(--sdj-white);
+  color:white;
   text-decoration:none;
   font-weight:600;
   font-size:15px;
   text-transform:uppercase;
-  letter-spacing:0.4px;
-  padding:6px 0;
-  transition: color .18s ease;
-  outline: none;
+  letter-spacing:0.3px;
+  position:relative;
+  white-space:nowrap;
+  transition:color .2s ease;
 }
 
-/* focus & hover styles (accessibility) */
-.sdj-nav a:focus,
-.sdj-nav a:hover{
-  color:var(--sdj-yellow);
+/* Hover color only */
+.sdj-nav a:hover,
+.sdj-nav a.active-hover{
+  color:white;
 }
 
-/* underline animation on hover */
+/* Underline animation */
 .sdj-nav a::after{
   content:"";
-  /* position:absolute; */
-  /* left:0; */
-  /* bottom:-6px; */
-  /* height:2px; */
-  border-bottom: 1px solid var(--sdj-gray-5);
-  /* width:0%; */
-  background:var(--sdj-yellow);
-  transition:width .22s ease;
+  position:absolute;
+  height:2px;
+  background:white;
+  left:0;
+  bottom:-4px;
+  width:0;
+  transition:width .25s ease;
 }
 .sdj-nav a:hover::after,
-.sdj-nav a:focus::after{ width:100%; }
+.sdj-nav a.active-hover::after{
+  width:100%;
+}
 
-/* separator */
+/* Separators */
 .sdj-separator{
-  color: rgba(255,255,255,0.45);
-  margin:0 10px;
+  display:inline-block;
+  width:22px;
+  text-align:center;
+  color:rgba(255,255,255,0.45);
   pointer-events:none;
 }
+
 
 /* ---------- dropdown ---------- */
 .dropdown-container{
