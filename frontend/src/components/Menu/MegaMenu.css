@@ -1,0 +1,32 @@
+.sdj-mega-menu {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1600px;
+  height: 770px;
+  background: var(--sdj-blue);
+  display: flex;
+  padding: 40px;
+  z-index: 5000;
+}
+
+.mega-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: 1px solid #FFF;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  color: white;
+}
+
+.mega-left {
+  width: 50%;
+}
+
+.mega-right {
+  width: 50%;
+}

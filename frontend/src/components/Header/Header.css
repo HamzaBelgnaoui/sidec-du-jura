@@ -1,0 +1,121 @@
+/* Header.css - pixel perfect per XD */
+:root{
+  --sdj-blue: #23387A;
+  --sdj-cyan: #039DCD;
+  --sdj-orange:#E75F2F;
+  --sdj-yellow:#F5B032;
+  --sdj-white:#FFFFFF;
+  --max-width: 1383px; /* container width per maquette */
+}
+
+/* header overall */
+.sdj-header {
+  width: 1600px;
+  height: 477px;
+  background: var(--sdj-blue);
+  padding-top: 8px;
+  box-sizing: border-box;
+
+}
+
+/* center container - EXACT dimensions from XD */
+.sdj-header-container {
+  width: var(--max-width);
+  height: 114px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* logo */
+.sdj-logo img {
+  width: 135px;
+  height: 114px;
+  display: block;
+  object-fit: contain;
+}
+.sdj-logo-placeholder {
+  width: 135px;
+  height: 114px;
+  background: var(--sdj-white);
+  opacity: 0.08;
+}
+
+/* menu area */
+.sdj-menu {
+  flex: 1;
+  display:flex;
+  justify-content:center;
+
+}
+.sdj-menu-inner {
+  width: 746px; /* exact width per maquette */
+  height: 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+}
+
+/* actions area - right */
+.sdj-actions {
+  width: 300px; /* fixed area to align exactly */
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap: 12px;
+}
+
+/* HERO */
+.hero {
+  width: var(--max-width);
+  margin: 12px auto 40px;
+  position: relative;
+}
+.hero-image {
+  width: 100%;
+  height: 519px;
+  background-size: cover;
+  background-position: center;
+}
+.hero-search-box {
+  width: 647px;                /* EXACT per maquette */
+  height: 103px;              /* EXACT per maquette */
+  background: var(--sdj-white);
+  border-radius: 8px;
+  box-shadow: 0 0 16px rgba(0,0,0,0.16);
+  margin: -72px auto 0;
+  display:flex;
+  align-items:center;
+  padding: 0 20px;
+}
+.hero-search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+
+/* keyboard focus */
+a:focus, button:focus, input:focus {
+  outline: 3px solid rgba(245,176,50,0.12);
+  outline-offset: 3px;
+}
+
+/* responsiveness anchor */
+@media (max-width: 1100px) {
+  .sdj-header-container, .hero { width: 95%; }
+  .hero-search-box { width: 600px; }
+}
+@media (max-width: 900px) {
+  .sdj-header-container { width: 95%; padding: 0 12px; }
+  .sdj-menu-inner { display: none; } /* replace with mobile nav */
+  .sdj-actions { gap: 10px; }
+  .hero-search-box { width: 95%; margin-top: -48px; }
+}
+@media (max-width: 480px) {
+  .sdj-logo img { height: 56px; width: auto; }
+  .hero-image { height: 360px; }
+  .hero-search-box { margin-top: -36px; padding: 10px; height: auto; }
+}
