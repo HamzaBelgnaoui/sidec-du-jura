@@ -1,0 +1,193 @@
+/* ================================
+   MENU PRINCIPAL — PIXEL PERFECT
+================================ */
+.sdj-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; 
+
+}
+
+/* Each top-level item behaves like a fixed column */
+
+.sdj-nav li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 145px; 
+  height: 24px;
+}
+
+/* ================================
+   LINKS
+================================ */
+.sdj-nav a {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 6px; /* OBLIGATOIRE */
+  color: var(--sdj-white);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 24px;
+}
+
+/* Underline stable — anti-vibration */
+
+.sdj-nav a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:2px;
+  background:var(--sdj-white);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:.22s ease;
+}
+.sdj-nav a:hover::after,
+.sdj-nav a.active-hover::after {
+  transform: scaleX(1);
+}
+
+/* Ne change pas la couleur (maquette) */
+.sdj-nav a:hover,
+.sdj-nav a.active-hover {
+  color: var(--sdj-white);
+}
+
+/* ================================
+   SEPARATOR (|) pixel perfect
+================================ */
+.sdj-separator {
+  position:absolute;
+  right:-16px;
+  top:50%;
+  transform:translateY(-50%);
+  height:14px;
+  border-right:1px solid #F5B032;
+}
+
+
+.sdj-nav li::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  border-right: 1px solid #F5B032;
+  opacity: 0;
+
+}
+/* Hide last separator */
+.sdj-nav li:last-child::after {
+  display: none;
+}
+
+/*  */
+.sdj-nav a.active-hover::before,
+.sdj-nav a:hover::before {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 14px;
+  border-right: 1px solid var(--sdj-white); 
+  width: 0; /* indispensable */
+  pointer-events: none;
+}
+
+/* STICKY */
+/* HEADER STICKY */
+/* .sdj-header-container {
+  position: sticky;
+  top: 0;
+  z-index: 9000;
+}
+.sdj-header-container.sticky {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+} */
+/* ================================
+   DROPDOWN — FIXED HOVER
+================================ */
+
+.dropdown-container {
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  background:#23387A;
+  min-width:220px;
+  padding:8px 0;
+  border-radius:6px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(6px);
+  transition:.22s ease;
+  pointer-events:none;
+  z-index:500;
+}
+
+.dropdown-container.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Hover zone extended = no flicker */
+.sdj-nav li:hover > .dropdown-container {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* smoother out */
+.sdj-nav li {
+  transition: opacity .15s ease;
+}
+
+/* Dropdown items */
+.dropdown {
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+}
+
+.dropdown li a {
+  display:block;
+  padding:9px 18px;
+  font-size:14px;
+}
+
+.dropdown li a:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* Nested submenu */
+.has-children .dropdown-container .dropdown-container {
+  top: 0;
+  left: 100%;
+}
+
+/* ================================
+   MOBILE VERSION
+================================ */
+.sdj-nav.mobile {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mobile-arrow {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
