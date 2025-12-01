@@ -1,11 +1,13 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./Menu.css";
 
-export default function Menu({ onOpenMega }) {
+export default function Menu({ onOpenMega, mobile = false }) {
   const [items, setItems] = useState([]);
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState(null);   // hover by mouse
+  const [openItem, setOpenItem] = useState(null); // click-open (mobile / desktop)
+  const hoverTimers = useRef({});                 // keep enter/leave timers to avoid flicker
 
   useEffect(() => {
     axios
@@ -14,47 +16,102 @@ export default function Menu({ onOpenMega }) {
       .catch(() => setItems([]));
   }, []);
 
+  // Helpers: small delays prevent flicker between link and dropdown
+  const startHover = (id) => {
+    clearTimeout(hoverTimers.current[id]);
+    hoverTimers.current[id] = setTimeout(() => setHovered(id), 80); // enter delay
+  };
+  const endHover = (id) => {
+    clearTimeout(hoverTimers.current[id]);
+    hoverTimers.current[id] = setTimeout(() => {
+      // only clear if not click-open
+      if (openItem !== id) setHovered((prev) => (prev === id ? null : prev));
+    }, 140); // leave delay allows moving to dropdown
+  };
+
+  const toggleDropdown = (id) => {
+    setOpenItem((prev) => (prev === id ? null : id));
+  };
+
+  const handleLinkClick = (e, item) => {
+    const hasChildren = item.children && item.children.length > 0;
+    if (!hasChildren) {
+      
+      e.preventDefault();
+      if (onOpenMega) onOpenMega(item.id);
+      return;
+    }
+    
+    e.preventDefault();
+    toggleDropdown(item.id);
+  };
+
   const renderMenuItems = (menuItems, level = 0) => {
     const className = level === 0 ? "sdj-nav" : "dropdown";
 
     return (
-      <ul className={className}>
+      <ul className={className} role={level === 0 ? "menubar" : "menu"}>
         {menuItems.map((item, index) => {
-          const hasChildren = item.children?.length > 0;
-          const isHover = hovered === item.id;
+          const hasChildren = item.children && item.children.length > 0;
+          const hoverActive = hovered === item.id;
+          const clickOpen = openItem === item.id;
+          // visible if hovered OR click-open (click-open used by mobile & by toggle)
+          const isVisible = hoverActive || clickOpen;
 
           return (
             <li
               key={item.id}
               className={hasChildren ? "has-children" : ""}
-              onMouseEnter={() => setHovered(item.id)}
-              onMouseLeave={() => setHovered(null)}
+              onMouseEnter={() => !mobile && startHover(item.id)}
+              onMouseLeave={() => !mobile && endHover(item.id)}
+              // keep dropdown accessible
+              aria-haspopup={hasChildren ? "true" : undefined}
+              aria-expanded={hasChildren ? isVisible : undefined}
+              role="none"
             >
-
-              {/* --- LINK --- */}
               <a
                 href={item.url || "#"}
-                className={isHover ? "active-hover" : ""}
-                onClick={(e) => {
-                  if (!hasChildren) {
+                role="menuitem"
+                tabIndex={0}
+                className={isVisible ? "active-hover" : ""}
+                onClick={(e) => handleLinkClick(e, item)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    onOpenMega(item.id);
+                    handleLinkClick(e, item);
+                  } else if (e.key === "Escape") {
+                    setHovered(null);
+                    setOpenItem(null);
                   }
                 }}
+                // keep pointer-events on link
               >
-                {isHover ? item.hover_title : item.title}
+                {isVisible && item.hover_title ? item.hover_title : item.title}
+
+                {/* mobile arrow shown only on mobile when item has children */}
+                {mobile && hasChildren && (
+                  <span className="mobile-arrow" aria-hidden>
+                    {isVisible ? "˄" : "˅"}
+                  </span>
+                )}
               </a>
 
-              {/* --- DROPDOWN --- */}
+              {/* fixed separator (visual) is provided by CSS via li::after,
+                  the hover-separator (aligned) is created via a pseudo element on the link:
+                  both are positioned the same so they align perfectly. */}
+
               {hasChildren && (
-                <div className={`dropdown-container ${isHover ? "show" : ""}`}>
+                <div
+                  className={`dropdown-container ${isVisible ? "show" : ""}`}
+                  // keep pointer events only when visible to avoid accidental flicker
+                >
                   {renderMenuItems(item.children, level + 1)}
                 </div>
               )}
 
-              {/* --- SEPARATEUR --- */}
+              {/* desktop-only visible separator between items (kept in DOM) */}
               {level === 0 && index < menuItems.length - 1 && (
-                <span className="sdj-separator"></span>
+                <span className="sdj-separator" aria-hidden></span>
               )}
             </li>
           );
