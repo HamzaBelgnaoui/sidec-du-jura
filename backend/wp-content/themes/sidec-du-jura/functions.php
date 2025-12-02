@@ -91,17 +91,43 @@ function sidec_get_menu_items() {
 
     // Tableau indexé par ID
     $items_by_id = [];
+    // 
+    
 
     // Préparer les items
     foreach ($menu_items as $item) {
         // Recup text survol dans menu
         $hover = get_field('hover_title', $item);
-
+        // 
+        $links = get_field('mega_links_group', $item->ID) ?: [];
         $items_by_id[$item->ID] = [
             'id'          => $item->ID,
             'title'       => $item->title,
             'hover_title' => $hover ?: $item->title,
             'url'         => $item->url,
+            'mega_menu'   => get_field('mega_menu', $item->ID),
+            'mega_image'  => wp_get_attachment_url(get_field('mega_image', $item->ID)),
+
+            // 🔥 Construire un tableau dynamique depuis le group
+            'mega_links' => [
+                [
+                'label' => $links['link_1_label'] ?? null,
+                'url'   => $links['link_1_url'] ?? null,
+                ],
+                [
+                'label' => $links['link_2_label'] ?? null,
+                'url'   => $links['link_2_url'] ?? null,
+                ],
+                [
+                'label' => $links['link_3_label'] ?? null,
+                'url'   => $links['link_3_url'] ?? null,
+                ],
+                [
+                'label' => $links['link_4_label'] ?? null,
+                'url'   => $links['link_4_url'] ?? null,
+                ],
+            ],
+
             'parent'      => intval($item->menu_item_parent),
             'children'    => []
         ];
