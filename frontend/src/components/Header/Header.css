@@ -119,3 +119,95 @@ a:focus, button:focus, input:focus {
   .hero-image { height: 360px; }
   .hero-search-box { margin-top: -36px; padding: 10px; height: auto; }
 }
+
+/* mobile */
+/* ============================
+   MOBILE MENU SLIDE LEFT
+============================ */
+.mobile-only { display: none; }
+.desktop-only { display: flex; }
+
+.sdj-burger {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sdj-burger img {
+  width: 28px;
+  height: 28px;
+}
+
+/* WRAPPER */
+.mobile-menu-wrapper {
+  width: 1600px;
+  height: 770px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* height: 100vh; */
+  display: flex;
+  pointer-events: none;
+  z-index: 9000;
+
+}
+
+/* PANEL AFFICHAGE MEGA MENU */
+.mobile-menu {
+  /* flex: 3; */
+  width: 1216px;
+  height: 770px;
+  background: var(--sdj-blue);
+  /* background: url('../../assets/decor-arc\ orange\ gris.svg'); */
+  /* background: url('../../assets/Hero\ img.jpg'); */
+  transform: translateX(-100%);
+  transition: transform 0.35s ease-out;
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+
+}
+
+.mobile-menu-wrapper.show .mobile-menu {
+  transform: translateX(0);
+}
+
+
+/* OVERLAY */
+.mobile-overlay {
+  width: 608px;
+  height: 770px;
+  flex: 1;
+  background: red;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+
+
+.mobile-menu-wrapper.show .mobile-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* close button */
+.mobile-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  background: transparent;
+  border: 1px solid var(--sdj-white);
+  color: var(--sdj-white);
+
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+}

@@ -1,4 +1,4 @@
-.sdj-mega-menu {
+/* .sdj-mega-menu {
   position: absolute;
   top: 0;
   left: 50%;
@@ -29,4 +29,118 @@
 
 .mega-right {
   width: 50%;
+} */
+/*
+.sdj-mega-menu {
+  position: fixed;
+  top: 0;
+  /* left: 50%; */
+  /* transform: translateX(-50%);
+
+  width: 1600px;
+  height: 770px;
+
+  background: #23387A;
+  display: flex;
+  padding: 60px 80px; */
+
+  /* z-index: 9999; */
+
+
+/* Bouton fermeture */
+/* .mega-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+
+  background: none;
+  border: 1px solid #FFFFFF;
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+
+  color: white;
+  font-size: 20px;
+} */
+
+/* LEFT COLUMN */
+/* .mega-left {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+} */
+
+/* Title */
+/* .mega-title {
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+} */
+
+/* Sub Items */
+/* .mega-sub {
+  margin-top: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
+
+.mega-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: white;
+  font-size: 16px;
+}
+
+.bullet {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+} */
+
+/* RIGHT COLUMN */
+/* .mega-right {
+  width: 40%;
+  padding-left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border-left: 1px solid rgba(255,255,255,0.25);
+} */
+
+/* Espace adhérent */
+/* .adh-btn {
+  width: 185px;
+  height: 36px;
+  background: #F5B032;
+  border: none;
+  color: #23387A;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4px;
+} */
+
+/* Quick links */
+/* .quick-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.quick-links li {
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+} */

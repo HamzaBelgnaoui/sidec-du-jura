@@ -39,6 +39,7 @@ export default function Menu({ onOpenMega, mobile = false }) {
       
       e.preventDefault();
       if (onOpenMega) onOpenMega(item.id);
+      
       return;
     }
     
@@ -47,7 +48,13 @@ export default function Menu({ onOpenMega, mobile = false }) {
   };
 
   const renderMenuItems = (menuItems, level = 0) => {
-    const className = level === 0 ? "sdj-nav" : "dropdown";
+    // const className = level === 0 ? "sdj-nav" : "dropdown";
+    const className =
+      level === 0
+        ? mobile
+          ? "sdj-nav mobile"
+          : "sdj-nav"
+          : "dropdown";
 
     return (
       <ul className={className} role={level === 0 ? "menubar" : "menu"}>
@@ -55,7 +62,7 @@ export default function Menu({ onOpenMega, mobile = false }) {
           const hasChildren = item.children && item.children.length > 0;
           const hoverActive = hovered === item.id;
           const clickOpen = openItem === item.id;
-          // visible if hovered OR click-open (click-open used by mobile & by toggle)
+          // visible if hovered OR click-open
           const isVisible = hoverActive || clickOpen;
 
           return (
@@ -89,21 +96,18 @@ export default function Menu({ onOpenMega, mobile = false }) {
                 {isVisible && item.hover_title ? item.hover_title : item.title}
 
                 {/* mobile arrow shown only on mobile when item has children */}
-                {mobile && hasChildren && (
-                  <span className="mobile-arrow" aria-hidden>
+                {/* {mobile && hasChildren && (
+                  <button className="mobile-arrow" aria-hidden>
                     {isVisible ? "˄" : "˅"}
-                  </span>
-                )}
+                  </button>
+                )} */}
               </a>
 
-              {/* fixed separator (visual) is provided by CSS via li::after,
-                  the hover-separator (aligned) is created via a pseudo element on the link:
-                  both are positioned the same so they align perfectly. */}
+            
 
               {hasChildren && (
                 <div
                   className={`dropdown-container ${isVisible ? "show" : ""}`}
-                  // keep pointer events only when visible to avoid accidental flicker
                 >
                   {renderMenuItems(item.children, level + 1)}
                 </div>
@@ -120,5 +124,10 @@ export default function Menu({ onOpenMega, mobile = false }) {
     );
   };
 
-  return renderMenuItems(items);
+  // return renderMenuItems(items);
+  return (
+    <div className={mobile ? "mobile-nav-wrapper" : ""}>
+      {renderMenuItems(items, mobile ? "mobile" : 0)}
+    </div>
+  );
 }

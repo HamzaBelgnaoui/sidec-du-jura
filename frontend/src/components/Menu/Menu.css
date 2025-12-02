@@ -114,6 +114,7 @@
 .sdj-header-container.sticky {
   box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 } */
+
 /* ================================
    DROPDOWN 
 ================================ */
@@ -213,23 +214,69 @@
   top: 0;
   left: 100%;
 
-  margin-left: 6px;        /* petit espace entre les 2 colonnes */
+  margin-left: 6px;      
 }
 
 
 /* ================================
    MOBILE VERSION
 ================================ */
-/* .sdj-nav.mobile {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+/* ===============================
+      MENU MOBILE — COLUMN
+================================*/
+.sdj-nav.mobile {
+  display: flex;
+  /* flex-direction: column !important; */
+  align-items: center;
+  gap: 18px;
+  padding: 20px 0;
+  width: 100%;
+
 }
 
-.mobile-arrow {
-  margin-left: 10px;
-  font-size: 18px;
-} */
+.sdj-nav.mobile li {
+  width: 100%;
+}
 
-.sdj-nav.mobile { flex-direction: column; gap: 12px; align-items:flex-start; }
-.mobile-arrow { margin-left: 10px; font-size: 18px; }
+.sdj-nav.mobile a {
+  width: 100%;
+  padding: 12px 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.sdj-nav.mobile .mobile-arrow {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #F5B032;
+}
+
+/* Dropdown mobile */
+.sdj-nav.mobile .dropdown-container {
+  position: relative;
+  padding-left: 16px;
+  margin-top: 6px;
+  border-left: 3px solid #F5B032;
+  /* width: 100%; */
+}
+
+
+
+/*burger button  */
+.burger-fallback {
+  width: 26px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.burger-fallback span {
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 3px;
+}
