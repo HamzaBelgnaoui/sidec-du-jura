@@ -224,59 +224,59 @@
 /* ===============================
       MENU MOBILE — COLUMN
 ================================*/
-.sdj-nav.mobile {
+/* .sdj-nav.mobile {
   display: flex;
-  /* flex-direction: column !important; */
+  flex-direction: column !important;
   align-items: center;
   gap: 18px;
   padding: 20px 0;
   width: 100%;
 
-}
+} */
 
-.sdj-nav.mobile li {
+/* .sdj-nav.mobile li {
   width: 100%;
-}
+} */
 
-.sdj-nav.mobile a {
+/* .sdj-nav.mobile a {
   width: 100%;
   padding: 12px 10px;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
-}
+} */
 
-.sdj-nav.mobile .mobile-arrow {
+/* .sdj-nav.mobile .mobile-arrow {
   margin-left: auto;
   background: transparent;
   border: none;
   font-size: 20px;
   color: #F5B032;
-}
+} */
 
 /* Dropdown mobile */
-.sdj-nav.mobile .dropdown-container {
+/* .sdj-nav.mobile .dropdown-container {
   position: relative;
   padding-left: 16px;
   margin-top: 6px;
   border-left: 3px solid #F5B032;
-  /* width: 100%; */
-}
+  width: 100%;
+} */
 
 
 
 /*burger button  */
-.burger-fallback {
+/* .burger-fallback {
   width: 26px;
   height: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
-.burger-fallback span {
+/* .burger-fallback span {
   height: 3px;
   width: 100%;
   background: white;
   border-radius: 3px;
-}
+} */

@@ -1,71 +1,119 @@
-// // MegaMenu.jsx
-// import React from "react";
-// import "./MegaMenu.css";
+import React, { useEffect, useRef } from "react";
 
-// export default function MegaMenu({ id, onClose }) {
-//   return (
-//     <div className="sdj-mega-menu">
-//       <button className="mega-close" onClick={onClose}>✕</button>
+/**
+ * MegaMenu
+ * - props.item : objet menu envoyé depuis Menu (voir ton API)
+ * - props.onClose : fonction pour fermer
+ * - props.icons : objet icons (optionnel)
+ */
+export default function MegaMenu({ item, onClose, icons = {} }) {
+  const wrapperRef = useRef();
 
-//       <div className="mega-left">
-//         <h2>Section {id}</h2>
-//       </div>
+  useEffect(() => {
+    // focus trap minimal & close on ESC
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    // prevent body scroll
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
 
-//       <div className="mega-right">
-//         <p>Contenu dynamique ici…</p>
-//       </div>
-//     </div>
-//   );
-// }
-// MegaMenu.jsx
-import React from "react";
-import "./MegaMenu.css";
+  if (!item) return null;
 
-// export default function MegaMenu({ data, onClose }) {
-//   if (!data) return null;
+  // helper: children (niveau 1)
+  const children = item.children || [];
 
-//   return (
-//     <div className="sdj-mega-menu">
+  // quicklinks: prefer item.mega_links, sinon empty
+  const quicklinks = item.mega_links && item.mega_links.length ? item.mega_links : [];
 
-//       {/* Bouton close */}
-//       {/* <button className="mega-close" onClick={onClose}>✕</button> */}
+  return (
+    <div className="sdj-mega-wrapper" role="dialog" aria-modal="true" ref={wrapperRef}>
+      <div className="sdj-mega-overlay" onClick={onClose} aria-hidden="true" />
 
-//       {/* Colonne gauche */}
-//       {/* <div className="mega-left">
-//         {data.map((section) => (
-//           <div key={section.id} className="mega-section">
-//             <div className="mega-title">{section.title}</div>
+      <div className="sdj-mega-panel" role="document">
+        <button className="sdj-mega-close" onClick={onClose} aria-label="Fermer le menu">✕</button>
 
-//             {section.children?.length > 0 && (
-//               <div className="mega-sub">
-//                 {section.children.map((child) => (
-//                   <div key={child.id} className="mega-sub-item">
-//                     <span className="bullet"></span>
-//                     {child.title}
-//                   </div>
-//                 ))}
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//       </div> */}
+        <div className="sdj-mega-columns">
+          {/* LEFT: white panel with sections */}
+          <div className="sdj-mega-left">
+            <ul className="sdj-mega-sections">
+              {/* Top: the main title clickable */}
+              <li className="sdj-mega-section-title">
+                <button className="section-toggle" aria-expanded="true">{item.title}</button>
+              </li>
 
-//       {/* Colonne droite */}
-//       {/* <div className="mega-right">
+              {children.length === 0 && (
+                <li className="sdj-mega-empty">Aucun sous-menu</li>
+              )}
 
-//         <button className="adh-btn">Espace adhérent</button>
+              {children.map((child) => (
+                <li key={child.id} className="sdj-mega-section">
+                  <div className="section-head">
+                    <button
+                      className="section-toggle"
+                      aria-expanded="false"
+                      onClick={(e) => {
+                        // toggle open/close: use CSS :focus-within or toggle class
+                        const el = e.currentTarget.closest(".sdj-mega-section");
+                        el.classList.toggle("open");
+                      }}
+                    >
+                      <span className="chevron">▾</span>
+                    </button>
 
-//         <ul className="quick-links">
-//           <li>Actualités</li>
-//           <li>Agenda</li>
-//           <li>Publications</li>
-//           <li>Lettre d’information</li>
-//           <li>Espace presse</li>
-//           <li>Contact</li>
-//           <li>Extranet</li>
-//         </ul>
+                    <a href={child.url || "#"} className="section-link">{child.title}</a>
+                  </div>
 
-//       </div> */}
-//     </div>
-//   );
-// }
+                  {/* sous-items (si existants) */}
+                  {child.children && child.children.length > 0 && (
+                    <ul className="subitems">
+                      {child.children.map((sub) => (
+                        <li key={sub.id} className="subitem">
+                          <a href={sub.url || "#"}>{sub.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* RIGHT: blue panel with quicklinks */}
+          <aside className="sdj-mega-right" aria-label="Liens rapides">
+            <div className="quicklinks-area">
+              <button className="adh-btn">ESPACE ADHÉRENTxxx</button>
+              <ul className="quicklinks-list">
+                {quicklinks.map((ql, i) => (
+                  ql.label ? (
+                    <li key={i}>
+                      <a href={ql.url || "#"}>
+                        <span className="ql-icon" aria-hidden>▣</span>
+                        {ql.label}
+                      </a>
+                    </li>
+                  ) : null
+                ))}
+              </ul>
+
+              {/* fallback links if none */}
+              {quicklinks.length === 0 && (
+                <ul className="quicklinks-list">
+                  <li><a href="#">Actualités</a></li>
+                  <li><a href="#">Agenda</a></li>
+                  <li><a href="#">Publications</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+              )}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  );
+}

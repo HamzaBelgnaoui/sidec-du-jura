@@ -34,11 +34,12 @@ export default function Menu({ onOpenMega, mobile = false }) {
   };
 
   const handleLinkClick = (e, item) => {
-    const hasChildren = item.children && item.children.length > 0;
+    // const hasChildren = item.children && item.children.length > 0;
+    const hasChildren = false; // Désactive dropdown, tout passe en mega menu
     if (!hasChildren) {
       
       e.preventDefault();
-      if (onOpenMega) onOpenMega(item.id);
+      if (onOpenMega) onOpenMega(item);
       
       return;
     }
@@ -59,7 +60,8 @@ export default function Menu({ onOpenMega, mobile = false }) {
     return (
       <ul className={className} role={level === 0 ? "menubar" : "menu"}>
         {menuItems.map((item, index) => {
-          const hasChildren = item.children && item.children.length > 0;
+          // const hasChildren = item.children && item.children.length > 0;
+          const hasChildren = false; // Désactive dropdown, tout passe en mega menu
           const hoverActive = hovered === item.id;
           const clickOpen = openItem === item.id;
           // visible if hovered OR click-open

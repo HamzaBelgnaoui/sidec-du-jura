@@ -1,146 +1,226 @@
-/* .sdj-mega-menu {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1600px;
-  height: 770px;
-  background: var(--sdj-blue);
-  display: flex;
-  padding: 40px;
-  z-index: 5000;
+/* MegaMenu.css - full screen overlay inspired by your XD screens */
+
+/* wrapper covers entire viewport */
+.sdj-mega-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: block;
+  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
-.mega-close {
+/* overlay semi-transparent (left white / right visible design uses two panels, we keep overlay subtle) */
+.sdj-mega-overlay {
   position: absolute;
-  top: 30px;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  opacity: 1;
+  transition: opacity .25s ease;
+}
+
+/* main panel is centered and full-screen; inside we split left/right */
+.sdj-mega-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  pointer-events: none; /* inner panels accept pointer-events */
+}
+
+/* close button */
+.sdj-mega-close {
+  position: absolute;
+  top: 20px;
   right: 30px;
-  background: none;
-  border: 1px solid #FFF;
+  z-index: 10110;
+  pointer-events: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  color: white;
 }
 
-.mega-left {
-  width: 50%;
+/* columns container */
+.sdj-mega-columns {
+  width: 1600px; /* matches container width maquette */
+  height: 770px; /* fixed full height as in maquette */
+  display: flex;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  pointer-events: auto;
 }
 
-.mega-right {
-  width: 50%;
-} */
-/*
-.sdj-mega-menu {
-  position: fixed;
-  top: 0;
-  /* left: 50%; */
-  /* transform: translateX(-50%);
+/* LEFT: white panel (approx 2/3) */
+.sdj-mega-left {
+  width: 1216px; /* maquette: 1216 left panel */
+  background: #ffffff;
+  padding: 48px 64px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
 
-  width: 1600px;
-  height: 770px;
-
+/* RIGHT: blue panel (approx 1/3) */
+.sdj-mega-right {
+  width: 608px; /* maquette: 608 right overlay */
   background: #23387A;
+  color: #fff;
+  padding: 48px 40px;
+  box-sizing: border-box;
   display: flex;
-  padding: 60px 80px; */
-
-  /* z-index: 9999; */
-
-
-/* Bouton fermeture */
-/* .mega-close {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-
-  background: none;
-  border: 1px solid #FFFFFF;
-  width: 42px;
-  height: 42px;
-  border-radius: 4px;
-
-  color: white;
-  font-size: 20px;
-} */
-
-/* LEFT COLUMN */
-/* .mega-left {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  gap: 38px;
-} */
-
-/* Title */
-/* .mega-title {
-  font-size: 20px;
-  color: white;
-  font-weight: 700;
-  text-transform: uppercase;
-} */
-
-/* Sub Items */
-/* .mega-sub {
-  margin-top: 10px;
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
 }
 
-.mega-sub-item {
+/* Left list styles */
+.sdj-mega-sections {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sdj-mega-section-title {
+  margin-bottom: 18px;
+}
+
+.sdj-mega-section-title .section-toggle {
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  color: #23387A;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+/* section */
+.sdj-mega-section {
+  margin-bottom: 14px;
+  border-left: 0;
+}
+
+.sdj-mega-section .section-head {
   display: flex;
   align-items: center;
   gap: 12px;
-
-  color: white;
-  font-size: 16px;
 }
 
-.bullet {
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-} */
-
-/* RIGHT COLUMN */
-/* .mega-right {
-  width: 40%;
-  padding-left: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  border-left: 1px solid rgba(255,255,255,0.25);
-} */
-
-/* Espace adhérent */
-/* .adh-btn {
-  width: 185px;
+.section-toggle {
+  width: 36px;
   height: 36px;
-  background: #F5B032;
+  background: #23387A;
+  color: #fff;
   border: none;
-  color: #23387A;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-radius: 4px;
-} */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:4px;
+  cursor: pointer;
+}
 
-/* Quick links */
-/* .quick-links {
+/* link */
+.section-link {
+  color: #23387A;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* subitems */
+.subitems {
+  list-style: none;
+  margin: 6px 0 12px 46px;
+  padding: 0;
+}
+
+.subitem a {
+  display:block;
+  text-decoration:none;
+  color: #23387A;
+  font-size: 14px;
+  padding: 6px 0;
+}
+
+/* when the .open class added, show subitems (we use class toggle via JS) */
+.sdj-mega-section .subitems {
+  display: none;
+}
+.sdj-mega-section.open .subitems {
+  display: block;
+}
+
+/* RIGHT quicklinks area */
+.quicklinks-area {
+  width: 100%;
+}
+.adh-btn {
+  background: #F5B032;
+  color:#23387A;
+  border:none;
+  padding:10px 18px;
+  font-weight:700;
+  border-radius:4px;
+  margin-bottom: 24px;
+  cursor:pointer;
+}
+
+.quicklinks-list {
   list-style: none;
   padding: 0;
   margin: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
 }
-
-.quick-links li {
-  color: white;
+.quicklinks-list li {
+  margin-bottom: 12px;
+}
+.quicklinks-list li a {
+  color: #fff;
+  text-decoration: none;
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-} */
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.ql-icon { opacity: 0.9; }
+
+/* responsive adjustments */
+@media (max-width: 1100px) {
+  .sdj-mega-columns { 
+    width: 100%; 
+    height: 100vh; 
+    flex-direction: column;
+     align-items: center;
+    justify-content: center;
+  }
+  /* .sdj-mega-left { padding: 28px; width: 66%; }
+  .sdj-mega-right { width: 34%; padding: 28px; } */
+  .sdj-mega-left,
+  .sdj-mega-right {
+   
+
+    width: 100%;
+    padding: 20px;
+    height: 50vh;
+  }
+}
+@media (max-width: 700px) {
+  /* mobile: slide left full width (reuse your existing mobile menu if you prefer) */
+  .sdj-mega-columns {
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+  }
+  .sdj-mega-left,
+  .sdj-mega-right {
+    width: 100%;
+    padding: 20px;
+    height: 50vh;
+    justify-content: center;
+  }
+  .sdj-mega-close {
+    right: 14px;
+    top: 12px;
+  }
+}
