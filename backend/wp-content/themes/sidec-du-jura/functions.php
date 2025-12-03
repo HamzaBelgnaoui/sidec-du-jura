@@ -25,6 +25,7 @@ add_theme_support('post-thumbnails');
 add_theme_support('menus');
 add_theme_support('title-tag');
 
+
 // +++++++menu +++++++++++++++
 
 function sidec_register_menus() {
@@ -76,55 +77,138 @@ add_action('rest_api_init', function () {
 //     return $items;
 // }
 
+// function sidec_get_menu_items() {
+//     // Récupère les emplacements de menus
+//     $locations = get_nav_menu_locations();
+//     // Vérifie que 'main-menu' existe
+//     if (!isset($locations['main-menu'])) {
+//         return [];
+//     }
+    
+//     // Récupère l’ID du menu assigné à 'main-menu'
+//     $menu_id = $locations['main-menu'];
+//     // Récupère les éléments du menu
+//     $menu_items = wp_get_nav_menu_items($menu_id);
+
+//     // Tableau indexé par ID
+//     $items_by_id = [];
+//     // 
+    
+
+//     // Préparer les items
+//     foreach ($menu_items as $item) {
+//         // Recup text survol dans menu
+//         $hover = get_field('hover_title', $item);
+//         // 
+//         $links = get_field('mega_links', $item->ID) ?: [];
+//         $items_by_id[$item->ID] = [
+//             'id'          => $item->ID,
+//             'title'       => $item->title,
+//             'hover_title' => $hover ?: $item->title,
+//             'url'         => $item->url,
+//             'mega_menu'   => get_field('mega_menu', $item->ID),
+//             'mega_image'  => wp_get_attachment_url(get_field('mega_image', $item->ID)),
+
+//             // 🔥 Construire un tableau dynamique depuis le group
+//             'mega_links' => [
+//                 [
+//                 'label' => $links['link_1_label'] ?? null,
+//                 'url'   => $links['link_1_url'] ?? null,
+//                 ],
+//                 [
+//                 'label' => $links['link_2_label'] ?? null,
+//                 'url'   => $links['link_2_url'] ?? null,
+//                 ],
+//                 [
+//                 'label' => $links['link_3_label'] ?? null,
+//                 'url'   => $links['link_3_url'] ?? null,
+//                 ],
+//                 [
+//                 'label' => $links['link_4_label'] ?? null,
+//                 'url'   => $links['link_4_url'] ?? null,
+//                 ],
+//             ],
+
+//             'parent'      => intval($item->menu_item_parent),
+//             'children'    => []
+//         ];
+//     }
+
+//     // Construire l’arborescence
+//     $tree = [];
+
+//     foreach ($items_by_id as $id => &$item) {
+//         if ($item['parent'] === 0) {
+//             // Élément principal
+//             $tree[] = &$item;
+//         } else {
+//             // Ajouter comme enfant du parent
+//             if (isset($items_by_id[$item['parent']])) {
+//                 $items_by_id[$item['parent']]['children'][] = &$item;
+//             }
+//         }
+//     }
+//     return $tree;
+// }
+// 🔥 Activer l'ancienne interface ACF pour retrouver toutes les règles
+
+
 function sidec_get_menu_items() {
-    // Récupère les emplacements de menus
+
     $locations = get_nav_menu_locations();
-    // Vérifie que 'main-menu' existe
     if (!isset($locations['main-menu'])) {
         return [];
     }
     
-    // Récupère l’ID du menu assigné à 'main-menu'
     $menu_id = $locations['main-menu'];
-    // Récupère les éléments du menu
     $menu_items = wp_get_nav_menu_items($menu_id);
 
-    // Tableau indexé par ID
     $items_by_id = [];
-    // 
-    
 
-    // Préparer les items
     foreach ($menu_items as $item) {
-        // Recup text survol dans menu
-        $hover = get_field('hover_title', $item);
-        // 
-        $links = get_field('mega_links_group', $item->ID) ?: [];
+
+        // Champs ACF
+        $hover    = get_field('hover_title', $item->ID);
+        $mega_img = get_field('mega_image', $item->ID);
+
+        // Récupération CORRECTE des champs mega_links
+        $link_1_label = get_field('link_1_label', $item->ID);
+        $link_1_url   = get_field('link_1_url', $item->ID);
+
+        $link_2_label = get_field('link_2_label', $item->ID);
+        $link_2_url   = get_field('link_2_url', $item->ID);
+
+        $link_3_label = get_field('link_3_label', $item->ID);
+        $link_3_url   = get_field('link_3_url', $item->ID);
+
+        $link_4_label = get_field('link_4_label', $item->ID);
+        $link_4_url   = get_field('link_4_url', $item->ID);
+
         $items_by_id[$item->ID] = [
             'id'          => $item->ID,
             'title'       => $item->title,
             'hover_title' => $hover ?: $item->title,
             'url'         => $item->url,
             'mega_menu'   => get_field('mega_menu', $item->ID),
-            'mega_image'  => wp_get_attachment_url(get_field('mega_image', $item->ID)),
+            'mega_image'  => $mega_img ? wp_get_attachment_url($mega_img) : false,
 
-            // 🔥 Construire un tableau dynamique depuis le group
+            // 🔥 VERSION CORRECTE
             'mega_links' => [
                 [
-                'label' => $links['link_1_label'] ?? null,
-                'url'   => $links['link_1_url'] ?? null,
+                    'label' => $link_1_label,
+                    'url'   => $link_1_url,
                 ],
                 [
-                'label' => $links['link_2_label'] ?? null,
-                'url'   => $links['link_2_url'] ?? null,
+                    'label' => $link_2_label,
+                    'url'   => $link_2_url,
                 ],
                 [
-                'label' => $links['link_3_label'] ?? null,
-                'url'   => $links['link_3_url'] ?? null,
+                    'label' => $link_3_label,
+                    'url'   => $link_3_url,
                 ],
                 [
-                'label' => $links['link_4_label'] ?? null,
-                'url'   => $links['link_4_url'] ?? null,
+                    'label' => $link_4_label,
+                    'url'   => $link_4_url,
                 ],
             ],
 
@@ -133,22 +217,22 @@ function sidec_get_menu_items() {
         ];
     }
 
-    // Construire l’arborescence
+    // Construction de l’arborescence parent/enfants
     $tree = [];
 
     foreach ($items_by_id as $id => &$item) {
         if ($item['parent'] === 0) {
-            // Élément principal
             $tree[] = &$item;
         } else {
-            // Ajouter comme enfant du parent
             if (isset($items_by_id[$item['parent']])) {
                 $items_by_id[$item['parent']]['children'][] = &$item;
             }
         }
     }
+
     return $tree;
 }
+
 
 
 // AJOUTE TEXT SURVOL DE MENU 
