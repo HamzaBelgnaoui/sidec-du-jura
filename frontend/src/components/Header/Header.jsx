@@ -18,6 +18,8 @@ export default function Header() {
   // Mega menu state
   const [megaOpen, setMegaOpen] = useState(false);
   const [megaItem, setMegaItem] = useState(null);
+  // 
+  // const [allMenuItems, setAllMenuItems] = useState([]);
 
   useEffect(() => {
     async function load() {
@@ -65,106 +67,7 @@ export default function Header() {
   };
 
   return (
-    // <header className="sdj-header">
-    //   <div className="sdj-header-container">
-
-    //     <Logo logo={logo} />
-
-    //     <nav className="sdj-menu">
-    //       <div className="sdj-menu-inner">
-    //         <Menu />
-            
-    //       </div>
-    //     </nav>
-
-    //     <HeaderActions
-    //       iconAdherent={icons.adherent}
-    //       iconSearch={icons.search}
-    //       iconEyesOff={icons.eyesOff}
-    //     />
-    //     {/* MOBILE BURGER */}
-    //     <button
-    //         className="sdj-burger mobile-only"
-    //         onClick={() => setMobileOpen(true)}
-    //       >
-    //         {icons.burger ? (
-    //           <img src={icons.burger} alt="Menu" />
-    //         ) : (
-    //           <div className="burger-fallback">
-    //             <span></span>
-    //             <span></span>
-    //             <span></span>
-    //           </div>
-    //         )}
-    //       </button>
-    //   </div>
-    //    {/* MOBILE MENU SLIDE LEFT */}
-    //   {/* <div className={`mobile-menu-wrapper ${mobileOpen ? "show" : ""}`}> */}
-    //     {/* <div className="mobile-menu"> */}
-    //       {/* <button
-    //         className="mobile-close"
-    //         onClick={() => setMobileOpen(false)}
-    //       >
-    //         ✕
-    //       </button> */}
-
-    //       {/* <Menu mobile={true} /> */}
-    //     {/* </div> */}
-
-    //     {/* overlay */}
-    //     {/* <div
-    //       className="mobile-overlay"
-    //       onClick={() => setMobileOpen(false)}
-    //     >
-    //       <button
-    //         className="mobile-close"
-    //         onClick={() => setMobileOpen(false)}
-    //       >
-    //         ✕
-    //       </button>
-    //     </div> */}
-    //   {/* </div> */}
-    //   {/* MOBILE MENU SLIDE LEFT */}
-    //   <div className={`mobile-menu-wrapper ${mobileOpen ? "show" : ""}`}>
-    //     <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu mobile">
-    //       <button className="mobile-close" onClick={() => setMobileOpen(false)} aria-label="Fermer le menu">✕</button>
-
-    //       {/* ici le contenu du menu (colonne) */}
-    //       <div className="mobile-menu-inner">
-    //         <Menu mobile={true} />
-    //         {/* droite: icones / liens rapides */}
-    //         <div className="mobile-quicklinks">
-    //           <button className="adh-btn">ESPACE ADHÉRENT</button>
-    //           <ul className="quicklinks-list">
-    //             <li><img src={icons.actualites} alt="" aria-hidden/> Actualités</li>
-    //             <li><img src={icons.agenda} alt="" aria-hidden/> Agenda</li>
-    //             <li><img src={icons.publication} alt="" aria-hidden/> Publications</li>
-    //           </ul>
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     {/* overlay */}
-    //     <div className="mobile-overlay" onClick={() => setMobileOpen(false)} aria-hidden="true" />
-    //   </div>
-
-
-
-    //   {/* {megaMenu && (
-    //     <MegaMenu id={megaMenu} onClose={() => setMegaMenu(null)} />
-    //   )} */}
-
-    //   <div className="hero">
-    //     <div
-    //       className="hero-image"
-    //       style={{ backgroundImage: `url(${heroImg || ""})` }}
-    //     />
-        
-    //     <div className="hero-search-box">
-    //       <input type="search" placeholder="Que recherchez-vous ?" />
-    //     </div>
-    //   </div>
-    // </header>
+   
      <header className="sdj-header">
       <div className="sdj-header-container">
         <Logo logo={logo} />
@@ -172,6 +75,8 @@ export default function Header() {
         <nav className="sdj-menu">
           <div className="sdj-menu-inner">
             <Menu onOpenMega={openMega} />
+            {/* <Menu onOpenMega={openMega} onLoaded={setAllMenuItems} /> */}
+
           </div>
         </nav>
 
@@ -181,11 +86,18 @@ export default function Header() {
           iconEyesOff={icons.eyesOff}
         />
 
-        <button
+        {/* <button
           className="sdj-burger mobile-only"
           onClick={() => setMobileOpen(true)}
         >
           {icons.burger ? <img src={icons.burger} alt="Menu" /> : <div className="burger-fallback"><span></span><span></span><span></span></div>}
+        </button> */}
+        {/* +++++++SE QUE JE CHANGE  */}
+        <button
+          className="sdj-burger mobile-only"
+          onClick={() => setMegaOpen(true)}
+        >
+          <img src={icons.burger} alt="Menu" />
         </button>
       </div>
 
@@ -193,7 +105,7 @@ export default function Header() {
       {megaOpen && (
         <MegaMenu item={megaItem} onClose={closeMega} icons={icons} />
       )}
-
+  
       {/* Mobile slide left (existant) */}
       {/* <div className={`mobile-menu-wrapper ${mobileOpen ? "show" : ""}`}>
         <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu mobile">

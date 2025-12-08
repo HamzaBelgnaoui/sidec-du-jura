@@ -211,3 +211,21 @@ a:focus, button:focus, input:focus {
   height: 38px;
   border-radius: 4px;
 } */
+
+/* burger  */
+/* Desktop : cacher burger */
+.sdj-burger {
+  display: none;
+}
+
+/* iPad + mobile : afficher burger */
+@media (max-width: 1024px) {
+  .sdj-burger {
+    display: block;
+  }
+
+  /* Et cacher le menu horizontal */
+  .sdj-menu {
+    display: none;
+  }
+}
