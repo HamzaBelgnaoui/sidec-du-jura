@@ -24,3 +24,7 @@
     --sdj-black: #000000;
     --sdj-white: #FFFFFF;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+}

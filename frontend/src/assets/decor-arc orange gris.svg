@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="516.253" height="780.341" viewBox="0 0 516.253 780.341">
+  <g id="decor-arc_orange_gris" data-name="decor-arc orange gris" transform="translate(238.253 -379.829)">
+    <path id="decor-arc_orange" data-name="decor-arc orange" d="M47.23,126.806c145.224,0,263.365,118.141,263.365,263.365H437.4C437.4,174.683,262.719,0,47.23,0Z" transform="translate(-159.4 379.828)" fill="#e75f2f"/>
+    <path id="decor-arc_gris" data-name="decor-arc gris" d="M47.23,126.806c145.224,0,263.365,118.141,263.365,263.365H437.4C437.4,174.683,262.719,0,47.23,0Z" transform="translate(151.918 722.77) rotate(90)" fill="#efefef"/>
+  </g>
+</svg>

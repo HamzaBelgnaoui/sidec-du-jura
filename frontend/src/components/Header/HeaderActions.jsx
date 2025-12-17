@@ -11,7 +11,7 @@ export default function HeaderActions({ iconAdherent, iconSearch, iconEyesOff })
           <span className="sdj-adh-placeholder" />
         )}
         <span>ESPACE ADHÉRENT</span>
-      </div>
+      </div>  
 
       <button className="sdj-action-btn" aria-label="Recherche">
         {iconSearch ? <img src={iconSearch} alt="" aria-hidden="true" /> : "🔍"}

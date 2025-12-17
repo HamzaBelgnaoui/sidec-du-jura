@@ -3,16 +3,31 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "./Menu.css";
 
-export default function Menu({ onOpenMega, mobile = false }) {
+export default function Menu({ onOpenMega, mobile = false, onLoaded }) {
   const [items, setItems] = useState([]);
   const [hovered, setHovered] = useState(null);   // hover by mouse
   const [openItem, setOpenItem] = useState(null); // click-open (mobile / desktop)
   const hoverTimers = useRef({});                 // keep enter/leave timers to avoid flicker
 
+  // useEffect(() => {
+  //   axios
+  //     .get("http://sidec-du-jura.local/wp-json/sidec/v1/menu")
+  //     .then(res) => 
+  //       setItems(res.data || []);
+  //       if (onLoaded) onLoaded(res.data || []); // <-- nouvelle ligne
+  //     }
+  //   )
+  //     .catch(() => setItems([]));
+  // }, []);
   useEffect(() => {
     axios
       .get("http://sidec-du-jura.local/wp-json/sidec/v1/menu")
-      .then((res) => setItems(res.data || []))
+      .then((res) => {
+        setItems(res.data || []);
+        
+        // ←←← nouvelle ligne pour envoyer le menu complet au parent (Header.jsx)
+        if (onLoaded) onLoaded(res.data || []);
+      })
       .catch(() => setItems([]));
   }, []);
 
@@ -35,21 +50,48 @@ export default function Menu({ onOpenMega, mobile = false }) {
 
   const handleLinkClick = (e, item) => {
     // const hasChildren = item.children && item.children.length > 0;
-    const hasChildren = false; // Désactive dropdown, tout passe en mega menu
-    if (!hasChildren) {
+    // const hasChildren = false; // Désactive dropdown, tout passe en mega menu
+    const hasChildren = item.children && item.children.length > 0;
+    // if (!hasChildren) {
       
+    //   e.preventDefault();
+    //   if (onOpenMega) onOpenMega(item);
+      
+    //   return;
+    // }
+    // if (!mobile) {
+    //   e.preventDefault();
+    //   if (onOpenMega) onOpenMega(item);
+    //   return;
+    // }
+    
+    // e.preventDefault();
+    // toggleDropdown(item.id);
+    // Desktop only
+    if (item.css_class === "plan-du-site") {
       e.preventDefault();
-      if (onOpenMega) onOpenMega(item);
-      
+      onOpenMega("all");
       return;
     }
-    
-    e.preventDefault();
-    toggleDropdown(item.id);
+    if (!mobile) {
+
+      // 1er click : ouvrir dropdown
+      if (!openItem || openItem !== item.id) {
+        e.preventDefault();
+        setOpenItem(item.id);
+        return;
+      }
+
+      // 2e click : ouvrir MegaMenu
+      e.preventDefault();
+      onOpenMega(item);
+      return;
+    }
   };
 
   const renderMenuItems = (menuItems, level = 0) => {
     // const className = level === 0 ? "sdj-nav" : "dropdown";
+
     const className =
       level === 0
         ? mobile
@@ -61,7 +103,9 @@ export default function Menu({ onOpenMega, mobile = false }) {
       <ul className={className} role={level === 0 ? "menubar" : "menu"}>
         {menuItems.map((item, index) => {
           // const hasChildren = item.children && item.children.length > 0;
-          const hasChildren = false; // Désactive dropdown, tout passe en mega menu
+          // const hasChildren = false; // Désactive dropdown, tout passe en mega menu
+          const hasChildren = item.children && item.children.length > 0;
+
           const hoverActive = hovered === item.id;
           const clickOpen = openItem === item.id;
           // visible if hovered OR click-open
@@ -73,6 +117,7 @@ export default function Menu({ onOpenMega, mobile = false }) {
               className={hasChildren ? "has-children" : ""}
               onMouseEnter={() => !mobile && startHover(item.id)}
               onMouseLeave={() => !mobile && endHover(item.id)}
+          
               // keep dropdown accessible
               aria-haspopup={hasChildren ? "true" : undefined}
               aria-expanded={hasChildren ? isVisible : undefined}

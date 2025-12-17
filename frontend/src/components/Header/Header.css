@@ -1,4 +1,4 @@
-/* Header.css - pixel perfect per XD */
+
 :root{
   --sdj-blue: #23387A;
   --sdj-cyan: #039DCD;
@@ -10,17 +10,16 @@
 
 /* header overall */
 .sdj-header {
-  width: 1600px;
+  /* width: 1600px; */
+  width: 100%;
   height: 477px;
   background: var(--sdj-blue);
-  padding-top: 8px;
-  box-sizing: border-box;
-
+  
 }
 
 /* center container - EXACT dimensions from XD */
 .sdj-header-container {
-  width: var(--max-width);
+  max-width: var(--max-width);
   height: 114px;
   margin: 0 auto;
   display: flex;
@@ -34,6 +33,7 @@
   height: 114px;
   display: block;
   object-fit: contain;
+  background: #E75F2F;
 }
 .sdj-logo-placeholder {
   width: 135px;
@@ -50,7 +50,7 @@
 
 }
 .sdj-menu-inner {
-  width: 746px; /* exact width per maquette */
+  /* width: 746px; */
   height: 24px;
   display:flex;
   align-items:center;
@@ -85,7 +85,7 @@
   background: var(--sdj-white);
   border-radius: 8px;
   box-shadow: 0 0 16px rgba(0,0,0,0.16);
-  margin: -72px auto 0;
+  /* margin: -72px auto 0; */
   display:flex;
   align-items:center;
   padding: 0 20px;

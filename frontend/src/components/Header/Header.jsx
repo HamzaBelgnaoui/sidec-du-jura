@@ -86,12 +86,7 @@ export default function Header() {
           iconEyesOff={icons.eyesOff}
         />
 
-        {/* <button
-          className="sdj-burger mobile-only"
-          onClick={() => setMobileOpen(true)}
-        >
-          {icons.burger ? <img src={icons.burger} alt="Menu" /> : <div className="burger-fallback"><span></span><span></span><span></span></div>}
-        </button> */}
+        
         {/* +++++++SE QUE JE CHANGE  */}
         <button
           className="sdj-burger mobile-only"
@@ -106,25 +101,6 @@ export default function Header() {
         <MegaMenu item={megaItem} onClose={closeMega} icons={icons} />
       )}
   
-      {/* Mobile slide left (existant) */}
-      {/* <div className={`mobile-menu-wrapper ${mobileOpen ? "show" : ""}`}>
-        <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu mobile">
-          <button className="mobile-close" onClick={() => setMobileOpen(false)} aria-label="Fermer le menu">✕</button>
-          <div className="mobile-menu-inner">
-            <Menu mobile={true} onOpenMega={openMega} />
-            <div className="mobile-quicklinks">
-              <button className="adh-btn">ESPACE ADHÉREN</button>
-              <ul className="quicklinks-list">
-                <li><img src={icons.actualites} alt="" aria-hidden/> Actualités</li>
-                <li><img src={icons.agenda} alt="" aria-hidden/> Agenda</li>
-                <li><img src={icons.publication} alt="" aria-hidden/> Publications</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="mobile-overlay" onClick={() => setMobileOpen(false)} aria-hidden="true" />
-      </div> */}
 
       <div className="hero">
         <div className="hero-image" style={{ backgroundImage: `url(${heroImg || ""})` }} />
