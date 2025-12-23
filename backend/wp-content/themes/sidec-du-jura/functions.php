@@ -12,8 +12,6 @@ require_once get_template_directory() . '/inc/security.php';
 
 // API
 require_once get_template_directory() . '/inc/api/menu.php';
-require_once get_template_directory() . '/inc/api/hero-search.php';
-require_once get_template_directory() . '/inc/api/quick-links.php';
 require_once get_template_directory() . '/inc/api/site-settings.php';
 
 

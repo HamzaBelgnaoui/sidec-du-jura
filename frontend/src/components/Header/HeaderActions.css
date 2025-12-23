@@ -32,7 +32,7 @@
   width: 63px;
   height: 63px;
   border: 1px solid var(--sdj-white);
-  border-radius: 4px;
+  /* border-radius: 4px; */
   background: transparent;
   display:flex;
   align-items:center;
